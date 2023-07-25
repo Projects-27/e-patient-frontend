@@ -16,43 +16,45 @@ export default function Register() {
      setTimeout(() => {
      seterrModal(false)
      setsuccess(false)
-     }, 4000);
+     }, 5000);
       return () => {
         clearTimeout()
       }
     }, [errModal , success])
 
-const Submit = ()=>{
+const Submit = (e)=>{
+    e.preventDefault()
     let userName = FunGet.val("#username")
     let password = FunGet.val("#password")
     let email = FunGet.val("#email")
-    let Contact = FunGet.val("#contact")
-    let Depertmentrole = FunGet.val("#department_role")
+    let contact = FunGet.val("#contact")
+    let Departmentrole = FunGet.val("#department_role")
     let Address = FunGet.val("#address")
 
     const doc = {
-     userName,
-     password,
-     email,
-     Contact,
-     Depertmentrole,
-     Address
+        userName,
+        password,
+        email ,
+        contact,
+        Departmentrole,
+        Address,
       }
+      console.log(doc)
       if(
           userName && 
           password && 
           email && 
-          Contact && 
-          Contact && 
-          Depertmentrole && 
+          contact && 
+          Departmentrole && 
           Address 
         ){
         setloading(true)
         FunRequest.post(EndPoint + '/new/user' , doc).then((data)=>{
             setloading(false)
+            console.log(data)
             if(data.status == 'error'){
                 seterrModal(true)
-                setmessage(data.error)
+                setmessage(data.message)
             }else{
                 setmessage("user registered successfully")
                 setsuccess(true)

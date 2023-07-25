@@ -32,7 +32,7 @@ if(user){
             <Link href="/patient/register">
             <div className={active == "d2" ? "active navLink" : "navLink"}>  <i className='bx bx-plus-medical'></i>  Register Patient </div>
             </Link>
-            <Link href="/dashboard">
+            <Link href="/patient/records">
             <div className={active == "d3" ? "active navLink" : "navLink"}>  <i className='bx bx-plus-medical'></i>  Patient Records</div>
             </Link>
             <Link href="/staff/register">
