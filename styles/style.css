@@ -3,8 +3,6 @@
     --light:#f2f2f2 ;
     --color:#202020;
     --backgroundColor:#f2f2f2;
-    --font:'Maven Pro', sans-serif !important;
-    --fontSize:0.9rem;
     --navWidth:95%;
     --navHeight:50px;
     --navAlign:space-between;
@@ -76,17 +74,6 @@ body{background-color: var(--backgroundColor);}
     
     .white{background-color: white;}
     .light{background-color: var(--light) !important;}
-.input{
-    border: none !important;
-    border-radius: 5rem;
-    width: 100%;
-}
-.textarea{
-    border: none !important;
-    border-radius: 1rem;
-    outline: none;
-    width: 100%;
-}
 
 .roundEdge{
     border-radius: 10rem !important;

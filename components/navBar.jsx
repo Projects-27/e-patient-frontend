@@ -33,13 +33,13 @@ if(user){
             <div className={active == "d2" ? "active navLink" : "navLink"}>  <i className='bx bx-plus-medical'></i>  Register Patient </div>
             </Link>
             <Link href="/patient/records">
-            <div className={active == "d3" ? "active navLink" : "navLink"}>  <i className='bx bx-plus-medical'></i>  Patient Records</div>
+            <div className={active == "d3" ? "active navLink" : "navLink"}>  <i className='bx bx-data'></i>  Patient Records</div>
             </Link>
             <Link href="/staff/register">
             <div className={active == "d4" ? "active navLink" : "navLink"}>  <i className='bx bx-user'></i>  New Staff</div>
             </Link>
             <Link href="/patient/doctor">
-            <div className={active == "d5" ? "active navLink" : "navLink"}>  <i className='bx bx-user'></i>  Patient Attend</div>
+            <div className={active == "d5" ? "active navLink" : "navLink"}>  <i className='bx bx-capsule'></i>  Prescriptions</div>
             </Link>
             <div className="section">
               <Button

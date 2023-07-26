@@ -163,13 +163,13 @@ onClick={()=>setdisplayModal(false)}
 
       <div>
       <Link href="/user" legacyBehavior>
-           <Button rounded bg="light" small>
+           <Button rounded bg="light" smaller>
            <Icon icon="far fa-user" /> Profile
            </Button>
             </Link>
             <BreadCrumb type={"straight"} />
             <Link href="#" legacyBehavior>
-           <Button rounded bg="primary" small>
+           <Button rounded bg="primary" smaller>
            <Icon icon="bx bx-book" /> Patient Records
            </Button>
             </Link>
@@ -187,13 +187,14 @@ onClick={()=>setdisplayModal(false)}
                 />
                 </Div>
                 <Div>
-                    <Button
-                    text="Reginster Patient"
-                    bg='primary'
+                 <Link href={'/patient/register'}>
+                 <Button
+                    text="Register Patient"
+                    bg='secondary'
                     startIcon={<Icon icon="bx bx-plus" />}
-                    onClick={()=>setmodal2(true)}
                     rounded
                     />
+                 </Link>
                 </Div>
               </RowFlex>
             </div>
@@ -201,8 +202,8 @@ onClick={()=>setdisplayModal(false)}
       </div>
       <Div funcss="card text-small round-edge margin-top-30">
       <div className="padding hr">
-      <RowFlex justify='space-between'>
-      <Input label="Matric Number" onChange={(e)=>setsearch(e.target.value)} bordered rounded/>
+      <RowFlex justify='space-between' gap='2rem'>
+      <Input label="Patient ID" onChange={(e)=>setsearch(e.target.value)} fullWidth/>
       <div>
         <Typography
         text='records'
@@ -218,7 +219,7 @@ onClick={()=>setdisplayModal(false)}
                .filter(fDoc =>{
                  if(!search){
                      return patients
-                 }else if(search.toString().includes(fDoc.NHISNumber.slice(0 , search.length))){
+                 }else if(search.toString().toLowerCase().trim().includes(fDoc.patient_id.toString().toLowerCase().trim().slice(0 , search.length))){
                          return fDoc
                  }
                }).length
@@ -241,12 +242,12 @@ onClick={()=>setdisplayModal(false)}
       patients.filter(fDoc =>{
         if(!search){
             return patients
-        }else if(search.toString().includes(fDoc.NHISNumber.slice(0 , search.length))){
+        }else if(search.toString().toLowerCase().trim().includes(fDoc.patient_id.toString().toLowerCase().trim().slice(0 , search.length))){
                 return fDoc
         }
       }).map(doc=>(
         <TableRow key={doc.id}>
-        <TableData>{doc.NHISNumber}</TableData>
+        <TableData>{doc.patient_id}</TableData>
         <TableData>{doc.PatientName}</TableData>
         <TableData>{doc.NHISNumber}</TableData>
         <TableData>{doc.Sex}</TableData>
