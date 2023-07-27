@@ -13,6 +13,19 @@ export default function Register() {
     const [success, setsuccess] = useState("")
     const [message, setmessage] = useState('')
     const [loading, setloading] = useState(false)
+    let selectedTest = []
+    const [allTests, setallTests] = useState('')
+
+    const HandleTest = (e)=>{
+        new Promise((resolve, reject) => {
+            selectedTest.push(e)
+            sessionStorage.setItem('test' , JSON.stringify(selectedTest))
+            resolve(JSON.parse(sessionStorage.getItem('test')))
+        })
+        .then(doc=>{
+            setallTests(doc )
+        })
+    }
 
     useEffect(() => {
      setTimeout(() => {
@@ -34,7 +47,7 @@ const Submit = ()=>{
     let Date = FunGet.val("#date")
     let DateofBirth = FunGet.val("#dob")
     let Sex = FunGet.val("#gender")
-    let SelectTest = FunGet.val("#test")
+   
     const doc = {
         PatientName,
         PlaceofBirth,
@@ -45,7 +58,7 @@ const Submit = ()=>{
         Date,
         DateofBirth,
         Sex,
-        SelectTest:[`${SelectTest}`],
+        SelectTest:selectedTest,
         prescriptions:{},
         doctor:{} ,
         status:"precriptions"
@@ -59,8 +72,8 @@ const Submit = ()=>{
           NationalID && 
           Date && 
           DateofBirth && 
-          Sex && 
-          SelectTest 
+          Sex 
+        //   SelectTest 
         ){
         setloading(true)
         FunRequest.post(EndPoint + '/new/patient' , doc).then((data)=>{
@@ -146,9 +159,17 @@ const Submit = ()=>{
                                 <option value="female">Female</option>
                             </select>
                         </div>
-                        <div className="col sm-12 md-4 lg-4 padding">
-                        <div className="text-gray">Select Test</div>
-                            <select id='test' type="text" className="input borderedInput lighter full-width" style={{borderRadius:'3rem'}}  >
+                        <div className="col sm-12 md-8 lg-8 padding">
+                        <div className='row-flex'>
+                          { allTests &&
+                            allTests.map(doc=>(
+                                <div key={doc}>{doc}</div>
+                            ))
+                          }
+                        </div>
+                            <select onChange={(e)=>{
+                             HandleTest(e.target.value)
+                            }} type="text" className="input borderedInput lighter full-width" style={{borderRadius:'3rem'}}  >
                                 <option value="">Select Test</option>
                                 {
                                     Test.map(e=>(

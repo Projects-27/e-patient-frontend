@@ -96,19 +96,19 @@ const Submit = (e)=>{
                     <div className="section row">
                         <div className="col sm-12 md-4 lg-4 padding">
                         <div className="text-gray">Email</div>
-                            <input id='email' type="text" className="input light" placeholder='Email' />
+                            <input id='email' type="text" className="input lighter full-width" placeholder='Email' />
                         </div>
                         <div className="col sm-12 md-4 lg-4 padding">
                         <div className="text-gray">Full Name</div>
-                            <input id='username' type="text" className="input light" placeholder='Full Name' />
+                            <input id='username' type="text" className="input lighter full-width" placeholder='Full Name' />
                         </div>
                         <div className="col sm-12 md-4 lg-4 padding">
                         <div className="text-gray">Phone Number</div>
-                            <input id='contact' type="text" className="input light" placeholder='Tel' />
+                            <input id='contact' type="text" className="input lighter full-width" placeholder='Tel' />
                         </div>
                         <div className="col sm-12 md-4 lg-4 padding">
                         <div className="text-gray">Department | Role</div>
-                            <select id='department_role' type="text" className="input light"  >
+                            <select id='department_role' type="text" className="input lighter full-width"  >
                                <option value="lab">Lab</option>
                                <option value="scan">Scan Unit</option>
                                <option value="physician">Physician</option>
@@ -117,11 +117,11 @@ const Submit = (e)=>{
                         </div>
                         <div className="col sm-12 md-4 lg-4 padding">
                         <div className="text-gray">Address</div>
-                            <input id='address' type="text" className="input light" placeholder='Address' />
+                            <input id='address' type="text" className="input lighter full-width" placeholder='Address' />
                         </div>
                         <div className="col sm-12 md-4 lg-4 padding">
                         <div className="text-gray">Password</div>
-                            <input id='password' type="password" className="input light" placeholder='Password' />
+                            <input id='password' type="password" className="input lighter full-width" placeholder='Password' />
                         </div>
                         <div className="col sm-12 md-4 lg-4 padding">
                        <button className="primary full-width roundEdge button" onClick={Submit}>Register</button>

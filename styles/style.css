@@ -11,9 +11,6 @@
 }
 
 /* Normalise */
-.p-bg, .primary{background-color: var(--primaryColor) !important;color: white;}
-.p-text{color: var(--primaryColor);}
-body{background-color: var(--backgroundColor);}
 .text-gray{color: #909090;}
 .card{
     background-color: #fff;

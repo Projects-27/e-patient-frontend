@@ -78,10 +78,10 @@ export default function Home() {
         Login Account
       </div>
       <div className="section">
-      <input id='email' type="email"  className="roundEdge input white" placeholder='Email' />
+      <input id='email' type="email"  className="full-width input white" placeholder='Email' />
       </div>
       <div className="section">
-      <input id='password' type="password" className="roundEdge input white" placeholder='Password' />
+      <input id='password' type="password" className="full-width input white" placeholder='Password' />
       </div>
       <div className="section">
       <button className='primary  full-width button roundEdge' onClick={Submit}>Login</button>
