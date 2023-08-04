@@ -7,6 +7,11 @@ import FunLoader from 'funuicss/component/FunLoader'
 import SuccessModal from '../../components/Success';
 import ErrorModal from '../../components/Error'
 import Test from  "@/data/Test"
+import { MultiSelect } from "react-multi-select-component";
+import RowFlex  from 'funuicss/component/RowFlex';
+import  Typography from 'funuicss/component/Typography';
+import  Icon from 'funuicss/component/Icon';
+
 export default function Register() {
 
     const [errModal, seterrModal] = useState(false)
@@ -14,8 +19,7 @@ export default function Register() {
     const [message, setmessage] = useState('')
     const [loading, setloading] = useState(false)
     let selectedTest = []
-    const [allTests, setallTests] = useState('')
-
+    const [selectedOption, setSelectedOption] = useState([]);
     const HandleTest = (e)=>{
         new Promise((resolve, reject) => {
             selectedTest.push(e)
@@ -58,7 +62,7 @@ const Submit = ()=>{
         Date,
         DateofBirth,
         Sex,
-        SelectTest:selectedTest,
+        SelectTest:selectedOption,
         prescriptions:{},
         doctor:{} ,
         status:"precriptions"
@@ -110,48 +114,47 @@ const Submit = ()=>{
                 <div className="h2">Patient Registration</div>
                 <div className='section'>Dashboard / <span className="text-gray">Register patient</span></div>
             </div>
-            <div className="m-section">
+            <div className="m-section row">
+                <div className="col padding sm-12 md-8 lg-8">
                 <div className="card">
-                    <div>Patient</div>
-                    <div className="h1">Registration</div>
                     <div className="section row">
-                        <div className="col sm-12 md-4 lg-4 padding">
+                        <div className="col sm-12 md-6 lg-6 padding">
                         <div className="text-gray">Full Name</div>
                             <input id='username' type="text" className="input borderedInput lighter full-width" style={{borderRadius:'3rem'}} placeholder='Full Name' />
                         </div>
-                        <div className="col sm-12 md-4 lg-4 padding">
+                        <div className="col sm-12 md-6 lg-6 padding">
                         <div className="text-gray">Phone Number</div>
                             <input id='contact' type="text" className="input borderedInput lighter full-width" style={{borderRadius:'3rem'}} placeholder='Tel' />
                         </div>
-                        <div className="col sm-12 md-4 lg-4 padding">
+                        <div className="col sm-12 md-6 lg-6 padding">
                         <div className="text-gray">Home Address</div>
                             <input id='home_address' type="text" className="input borderedInput lighter full-width" style={{borderRadius:'3rem'}} placeholder='Tel' />
                         </div>
-                        <div className="col sm-12 md-4 lg-4 padding">
+                        <div className="col sm-12 md-6 lg-6 padding">
                         <div className="text-gray">Place Of Birth</div>
                             <input id='place_of_birth' type="text" className="input borderedInput lighter full-width" style={{borderRadius:'3rem'}} placeholder='Home address' />
                         </div>
-                        <div className="col sm-12 md-4 lg-4 padding">
+                        <div className="col sm-12 md-6 lg-6 padding">
                         <div className="text-gray">National ID</div>
                             <input id='national_id' type="text" className="input borderedInput lighter full-width" style={{borderRadius:'3rem'}} placeholder='Tel' />
                         </div>
-                        <div className="col sm-12 md-4 lg-4 padding">
+                        <div className="col sm-12 md-6 lg-6 padding">
                         <div className="text-gray">NHIS</div>
                             <input id='nhis' type="text" className="input borderedInput lighter full-width" style={{borderRadius:'3rem'}} placeholder=' If any' />
                         </div>
-                        <div className="col sm-12 md-4 lg-4 padding">
+                        <div className="col sm-12 md-6 lg-6 padding">
                             <div className="text-gray">Date of birth</div>
                             <input id='dob' type="date" className="input borderedInput lighter full-width" style={{borderRadius:'3rem'}}  />
                         </div>
-                        <div className="col sm-12 md-4 lg-4 padding">
+                        <div className="col sm-12 md-6 lg-6 padding">
                             <div className="text-gray">Date</div>
                             <input id='date' type="date" className="input borderedInput lighter full-width" style={{borderRadius:'3rem'}}  />
                         </div>
-                        <div className="col sm-12 md-4 lg-4 padding">
+                        <div className="col sm-12 md-6 lg-6 padding">
                         <div className="text-gray">Town | Location</div>
                             <input id='location' type="text" className="input borderedInput lighter full-width" style={{borderRadius:'3rem'}} placeholder='Enter town | location' />
                         </div>
-                        <div className="col sm-12 md-4 lg-4 padding">
+                        <div className="col sm-12 md-6 lg-6 padding">
                         <div className="text-gray">Gender</div>
                             <select id='gender' type="text" className="input borderedInput lighter full-width" style={{borderRadius:'3rem'}}  >
                                 <option value="">--Select Gender--</option>
@@ -159,36 +162,42 @@ const Submit = ()=>{
                                 <option value="female">Female</option>
                             </select>
                         </div>
-                        <div className="col sm-12 md-8 lg-8 padding">
-                        <div className='row-flex'>
-                          { allTests &&
-                            allTests.map(doc=>(
-                                <div key={doc}>{doc}</div>
-                            ))
-                          }
-                        </div>
-                            <select onChange={(e)=>{
-                             HandleTest(e.target.value)
-                            }} type="text" className="input borderedInput lighter full-width" style={{borderRadius:'3rem'}}  >
-                                <option value="">Select Test</option>
-                                {
-                                    Test.map(e=>(
-                                        <option key={e} value={e}>{e}</option>
-                                    ))
-                                }
-                            </select>
-                        </div>
-                        <div className="col sm-12 md-4 lg-4 padding">
+               
+                        <div className="col sm-12 md-6 lg-6 padding">
                        <div className='fit' style={{
                         display:'flex',
                         flexDirection:'row',
                         alignItems:'flex-end'
                        }}>
-                       <button className="primary full-width roundEdge button" onClick={Submit}>Register</button>
+                       <button className="primary full-width roundEdge button" onClick={Submit}>Register <Icon icon="far fa-paper-plane"  /></button>
                        </div>
                         </div>
                     </div>
                 </div>
+                </div>
+                <div className="col padding sm-12 md-4 lg-4">
+                    <div className="card padding round-egde">
+                    <pre>
+                    {
+                        selectedOption.map((doc)=>(
+                                <div className='bt padding'>
+                                    <Typography
+                                    text={doc.label}
+                                    italic
+                                    />
+                                </div>
+                        ))
+                    }
+                </pre>
+                            <MultiSelect
+                                options={Test}
+                                value={selectedOption}
+                                onChange={setSelectedOption}
+                                labelledBy="Select"
+                            />
+                    </div>
+                </div>
+              
             </div>
         </div>
     </div>

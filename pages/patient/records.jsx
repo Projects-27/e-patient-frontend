@@ -37,6 +37,7 @@ export default function Log() {
     const [deleteModal, setdeleteModal] = useState(false)
     const [displayModal, setdisplayModal] = useState(false)
     const [search, setsearch] = useState('')
+    const [viewDoc, setviewDoc] = useState("")
 
     useEffect(() => {
      if(!patients){
@@ -70,7 +71,7 @@ setdisplayModal(true)
   return (
     <div>
         
-      <NavBar active={"d2"}/>
+      <NavBar active={"d3"}/>
     <div className='content'>
           {
         loading ?
@@ -113,53 +114,66 @@ onClick={handleLog}
 </Modal>
 
 
+{
+  viewDoc &&
 <Modal 
 animation="ScaleUp" 
 duration={0.4} 
 open={displayModal}
 backdrop
-maxWidth="500px"
+maxWidth="1000px"
 >
 <ModalHeader funcss='h5'>
-  Iddisah Yakubu
+{viewDoc.PatientName}
+<CloseModal  onClick={()=>setdisplayModal(false)}/>
 </ModalHeader>
 <ModalContent funcss="padding-20">
+<div className="center width-500-max fit">
 <RowFlex justify='space-between'>
   <Div>
-  <Typography italic size='small' color='primary'>Student Id</Typography> 
+  <Typography italic size='small' color='primary'>Patient ID:</Typography> 
  <div />
- <Typography>{editDoc.StudentID}</Typography>
+ <Typography>{viewDoc.patient_id}</Typography>
+  </Div>
+  <Div>
+  <Typography italic size='small' color='primary'>Gender:</Typography> 
+ <div />
+ <Typography>{viewDoc.Sex}</Typography>
   </Div>
   <Div>
   <Typography italic size='small' color='primary'>Date</Typography> 
  <div />
- <Typography>{editDoc.Date}</Typography>
+ <Typography>{viewDoc.Date}</Typography>
   </Div>
 
 </RowFlex>
 <p>
-<Typography italic size='small' color='primary'>Activity</Typography> 
+<Typography italic size='small' color='primary'>Doctor</Typography> 
    <Div funcss='border padding round-edge'>
-    {editDoc.Activity}
+   <RowFlex justify='space-between'>
+  <Div>
+  <Typography italic size='small' color='primary'>Full Name:</Typography> 
+ <div />
+ <Typography>{viewDoc.doctor.UserName}</Typography>
+  </Div>
+  <Div>
+  <Typography italic size='small' color='primary'>contact:</Typography> 
+ <div />
+ <Typography>{viewDoc.doctor.contact}</Typography>
+  </Div>
+  <Div>
+  <Typography italic size='small' color='primary'>Department</Typography> 
+ <div />
+ <Typography>{viewDoc.doctor.Departmentrole}</Typography>
+  </Div>
+
+</RowFlex>
     </Div>
   </p>
+</div>
 </ModalContent>
-<ModalAction funcss="text-right light bottomEdge padding-20">
-<Button 
-bg="success"
-outlined
-text="Cancel"
-rounded
-onClick={()=>setdisplayModal(false)}
-/>
-<Button 
-bg="light-danger"
-text="Deactivate"
-rounded
-onClick={()=>setdisplayModal(false)}
-/>
-</ModalAction>
 </Modal>
+}
 
       <div>
       <Link href="/user" legacyBehavior>
@@ -234,8 +248,8 @@ onClick={()=>setdisplayModal(false)}
            <TableData>Name</TableData>
            <TableData>NHIS</TableData>
            <TableData>Gender</TableData>
+           <TableData>Status</TableData>
            <TableData>Date</TableData>
-           <TableData>Test</TableData>
        </TableHead>
      {
       patients &&
@@ -251,11 +265,14 @@ onClick={()=>setdisplayModal(false)}
         <TableData>{doc.PatientName}</TableData>
         <TableData>{doc.NHISNumber}</TableData>
         <TableData>{doc.Sex}</TableData>
+        <TableData>{doc.status}</TableData>
         <TableData>{doc.Date}</TableData>
-        <TableData>{doc.SelectTest}</TableData>
         <TableData>
-          <Button bg='light-success' small rounded startIcon={<Icon icon="far fa-edit"  />}
-          onClick={()=>HandleModal(doc)}
+          <Button bg='light-success' small rounded startIcon={<Icon icon="bx bx-hide"  />}
+          onClick={()=>{
+            HandleModal(true)
+            setviewDoc(doc)
+          }}
           >View</Button>
         </TableData>
     </TableRow>

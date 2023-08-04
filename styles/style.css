@@ -12,8 +12,10 @@
 
 /* Normalise */
 .text-gray{color: #909090;}
+body{
+    background-color: #f2f2f2 !important;
+}
 .card{
-    background-color: #fff;
     padding: 2rem;
     border-radius: .5rem;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 25px 50px -12px !important;
@@ -53,12 +55,13 @@
     top: calc(var(--navHeight) + 50px);
     right: 0;
     width: calc(97.5% - 220px) ;
-    padding: 20px 5%;
+    padding: 20px 2%;
  
     /* max-width: 800px; */
 
 
 }
+
 
 .formCon{
     max-width: 350px;
