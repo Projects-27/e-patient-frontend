@@ -9,27 +9,26 @@ import ErrorModal from '../../components/Error'
 import Test from  "@/data/Test"
 import { MultiSelect } from "react-multi-select-component";
 import RowFlex  from 'funuicss/component/RowFlex';
+import Div  from 'funuicss/component/Div';
 import  Typography from 'funuicss/component/Typography';
 import  Icon from 'funuicss/component/Icon';
-
+import Modal from 'funuicss/component/Modal'
+import ModalHeader from 'funuicss/component/ModalHeader'
+import CloseModal from 'funuicss/component/CloseModal'
+import ModalContent from 'funuicss/component/ModalContent'
+import ModalAction from 'funuicss/component/ModalAction'
+import PrintSheet from './../../components/PrintSheet';
 export default function Register() {
 
     const [errModal, seterrModal] = useState(false)
     const [success, setsuccess] = useState("")
     const [message, setmessage] = useState('')
     const [loading, setloading] = useState(false)
+    const [modal2, setmodal2] = useState("")
     let selectedTest = []
     const [selectedOption, setSelectedOption] = useState([]);
-    const HandleTest = (e)=>{
-        new Promise((resolve, reject) => {
-            selectedTest.push(e)
-            sessionStorage.setItem('test' , JSON.stringify(selectedTest))
-            resolve(JSON.parse(sessionStorage.getItem('test')))
-        })
-        .then(doc=>{
-            setallTests(doc )
-        })
-    }
+    const [printDoc, setprintDoc] = useState("")
+
 
     useEffect(() => {
      setTimeout(() => {
@@ -42,13 +41,22 @@ export default function Register() {
     }, [errModal , success])
 
 const Submit = ()=>{
+    var locale = "en-us";
+    var today = new Date();
+    var day = today.getDate();
+    var fullDay = ("0" + day).slice(-2);
+    var longMonth = today.toLocaleString(locale, { month: "long" });
+    var year = today.getFullYear();
+    const fullDate = longMonth + " " + fullDay + ", " + year
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+
     let PatientName = FunGet.val("#username")
     let PlaceofBirth = FunGet.val("#place_of_birth")
     let HomeAddress = FunGet.val("#home_address")
     let Contact = FunGet.val("#contact")
     let NHISNumber = FunGet.val("#nhis")
     let NationalID = FunGet.val("#national_id")
-    let Date = FunGet.val("#date")
+    let date = fullDate
     let DateofBirth = FunGet.val("#dob")
     let Sex = FunGet.val("#gender")
    
@@ -59,13 +67,13 @@ const Submit = ()=>{
         Contact,
         NHISNumber,
         NationalID,
-        Date,
+        Date:date,
         DateofBirth,
         Sex,
         SelectTest:selectedOption,
         prescriptions:{},
         doctor:{} ,
-        status:"precriptions"
+        status:"registered"
       }
       if(
           PatientName && 
@@ -74,7 +82,7 @@ const Submit = ()=>{
           Contact && 
           NHISNumber && 
           NationalID && 
-          Date && 
+          date && 
           DateofBirth && 
           Sex 
         //   SelectTest 
@@ -82,11 +90,12 @@ const Submit = ()=>{
         setloading(true)
         FunRequest.post(EndPoint + '/new/patient' , doc).then((data)=>{
             setloading(false)
-            setsuccess(true)
-            setmessage("Patient registered successfully")
-            setTimeout(() => {
-                window.location.reload()
-            }, 3000);
+            // setsuccess(true)
+            // setmessage("Patient registered successfully")
+            // setTimeout(() => {
+            //     window.location.reload()
+            // }, 3000);
+            setprintDoc(doc)
           })
           .catch(err=>{
             seterrModal(true)
@@ -101,6 +110,11 @@ const Submit = ()=>{
 }
   return (
     <div>
+   {
+    printDoc ?
+    <PrintSheet  doc={printDoc}/>
+    :''
+   }
            {
     errModal ?  <ErrorModal message={message}  /> : ''
    }
@@ -110,6 +124,7 @@ const Submit = ()=>{
    {loading ?  <FunLoader size="80px" fixed/> : ''}
         <NavBar active={"d2"}/>
         <div className="content">
+
             <div>
                 <div className="h2">Patient Registration</div>
                 <div className='section'>Dashboard / <span className="text-gray">Register patient</span></div>
@@ -146,10 +161,7 @@ const Submit = ()=>{
                             <div className="text-gray">Date of birth</div>
                             <input id='dob' type="date" className="input borderedInput lighter full-width" style={{borderRadius:'3rem'}}  />
                         </div>
-                        <div className="col sm-12 md-6 lg-6 padding">
-                            <div className="text-gray">Date</div>
-                            <input id='date' type="date" className="input borderedInput lighter full-width" style={{borderRadius:'3rem'}}  />
-                        </div>
+                  
                         <div className="col sm-12 md-6 lg-6 padding">
                         <div className="text-gray">Town | Location</div>
                             <input id='location' type="text" className="input borderedInput lighter full-width" style={{borderRadius:'3rem'}} placeholder='Enter town | location' />
