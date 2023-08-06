@@ -64,9 +64,9 @@ export default function Doctor() {
            FunRequest.get(EndPoint + "/patient/hospital/" + p_id )
            .then(data=>{
             setloading(false)
-            if(doc.status == 'ok'){
-                setpatient(doc.data)
-            }else if (doc.status == 'error'){
+            if(data.status == 'ok'){
+                setpatient(data.data)
+            }else if (data.status == 'error'){
                 seterrModal(true)
                 setmessage(doc.message)
             }
