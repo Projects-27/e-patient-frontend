@@ -95,7 +95,9 @@ const Submit = ()=>{
             // setTimeout(() => {
             //     window.location.reload()
             // }, 3000);
-            setprintDoc(doc)
+         if(data.status == "ok"){
+            setprintDoc(data.data)
+         }
           })
           .catch(err=>{
             seterrModal(true)
@@ -135,40 +137,40 @@ const Submit = ()=>{
                     <div className="section row">
                         <div className="col sm-12 md-6 lg-6 padding">
                         <div className="text-gray">Full Name</div>
-                            <input id='username' type="text" className="input borderedInput lighter full-width" style={{borderRadius:'3rem'}} placeholder='Full Name' />
+                            <input id='username' type="text" className="input borderedInput full-width" style={{borderRadius:'3rem'}} placeholder='Full Name' />
                         </div>
                         <div className="col sm-12 md-6 lg-6 padding">
                         <div className="text-gray">Phone Number</div>
-                            <input id='contact' type="text" className="input borderedInput lighter full-width" style={{borderRadius:'3rem'}} placeholder='Tel' />
+                            <input id='contact' type="text" className="input borderedInput full-width" style={{borderRadius:'3rem'}} placeholder='Tel' />
                         </div>
                         <div className="col sm-12 md-6 lg-6 padding">
                         <div className="text-gray">Home Address</div>
-                            <input id='home_address' type="text" className="input borderedInput lighter full-width" style={{borderRadius:'3rem'}} placeholder='Tel' />
+                            <input id='home_address' type="text" className="input borderedInput full-width" style={{borderRadius:'3rem'}} placeholder='Tel' />
                         </div>
                         <div className="col sm-12 md-6 lg-6 padding">
                         <div className="text-gray">Place Of Birth</div>
-                            <input id='place_of_birth' type="text" className="input borderedInput lighter full-width" style={{borderRadius:'3rem'}} placeholder='Home address' />
+                            <input id='place_of_birth' type="text" className="input borderedInput full-width" style={{borderRadius:'3rem'}} placeholder='Home address' />
                         </div>
                         <div className="col sm-12 md-6 lg-6 padding">
                         <div className="text-gray">National ID</div>
-                            <input id='national_id' type="text" className="input borderedInput lighter full-width" style={{borderRadius:'3rem'}} placeholder='Tel' />
+                            <input id='national_id' type="text" className="input borderedInput full-width" style={{borderRadius:'3rem'}} placeholder='Tel' />
                         </div>
                         <div className="col sm-12 md-6 lg-6 padding">
                         <div className="text-gray">NHIS</div>
-                            <input id='nhis' type="text" className="input borderedInput lighter full-width" style={{borderRadius:'3rem'}} placeholder=' If any' />
+                            <input id='nhis' type="text" className="input borderedInput full-width" style={{borderRadius:'3rem'}} placeholder=' If any' />
                         </div>
                         <div className="col sm-12 md-6 lg-6 padding">
                             <div className="text-gray">Date of birth</div>
-                            <input id='dob' type="date" className="input borderedInput lighter full-width" style={{borderRadius:'3rem'}}  />
+                            <input id='dob' type="date" className="input borderedInput full-width" style={{borderRadius:'3rem'}}  />
                         </div>
                   
                         <div className="col sm-12 md-6 lg-6 padding">
                         <div className="text-gray">Town | Location</div>
-                            <input id='location' type="text" className="input borderedInput lighter full-width" style={{borderRadius:'3rem'}} placeholder='Enter town | location' />
+                            <input id='location' type="text" className="input borderedInput full-width" style={{borderRadius:'3rem'}} placeholder='Enter town | location' />
                         </div>
                         <div className="col sm-12 md-6 lg-6 padding">
                         <div className="text-gray">Gender</div>
-                            <select id='gender' type="text" className="input borderedInput lighter full-width" style={{borderRadius:'3rem'}}  >
+                            <select id='gender' type="text" className="input borderedInput full-width" style={{borderRadius:'3rem'}}  >
                                 <option value="">--Select Gender--</option>
                                 <option value="male">male</option>
                                 <option value="female">Female</option>

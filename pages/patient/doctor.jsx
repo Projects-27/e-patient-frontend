@@ -64,11 +64,11 @@ export default function Doctor() {
            FunRequest.get(EndPoint + "/patient/hospital/" + p_id )
            .then(data=>{
             setloading(false)
-            if(data.status == 'ok'){
-                setpatient(data.data)
-            }else if (data.status == 'error'){
+            if(doc.status == 'ok'){
+                setpatient(doc.data)
+            }else if (doc.status == 'error'){
                 seterrModal(true)
-                setmessage(data.message)
+                setmessage(doc.message)
             }
            }).catch(err=>{
             console.log(err)
@@ -94,13 +94,17 @@ const Submit = ()=>{
     if(findings && results){
         setloading(true)
         FunRequest.patch(EndPoint + '/prescription/' + patient.id , data)
-        .then(()=>{
+        .then((doc)=>{
             setloading(false)
-           if(data.status == 'ok'){
+           if(doc.status == 'ok'){
             setsuccess(true)
-           }else if (data.status == 'error'){
+            setmessage("prescriptions given succesfully")
+            setTimeout(() => {
+                window.location.reload()
+            }, 3000);
+           }else if (doc.status == 'error'){
             seterrModal(true)
-            setmessage(data.message)
+            setmessage(doc.message)
            }
         }).catch((err)=>{
             console.log(err)

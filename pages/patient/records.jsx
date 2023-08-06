@@ -25,6 +25,7 @@ import TableHead from 'funuicss/component/TableHead'
 import TableData from 'funuicss/component/TableData'
 import TableRow from 'funuicss/component/TableRow'
 import NavBar from '../../components/navBar'
+import PrintSheet from '../../components/PrintSheet'
 
 
 export default function Log() {
@@ -116,63 +117,7 @@ onClick={handleLog}
 
 {
   viewDoc &&
-<Modal 
-animation="ScaleUp" 
-duration={0.4} 
-open={displayModal}
-backdrop
-maxWidth="1000px"
->
-<ModalHeader funcss='h5'>
-{viewDoc.PatientName}
-<CloseModal  onClick={()=>setdisplayModal(false)}/>
-</ModalHeader>
-<ModalContent funcss="padding-20">
-<div className="center width-500-max fit">
-<RowFlex justify='space-between'>
-  <Div>
-  <Typography italic size='small' color='primary'>Patient ID:</Typography> 
- <div />
- <Typography>{viewDoc.patient_id}</Typography>
-  </Div>
-  <Div>
-  <Typography italic size='small' color='primary'>Gender:</Typography> 
- <div />
- <Typography>{viewDoc.Sex}</Typography>
-  </Div>
-  <Div>
-  <Typography italic size='small' color='primary'>Date</Typography> 
- <div />
- <Typography>{viewDoc.Date}</Typography>
-  </Div>
-
-</RowFlex>
-<p>
-<Typography italic size='small' color='primary'>Doctor</Typography> 
-   <Div funcss='border padding round-edge'>
-   <RowFlex justify='space-between'>
-  <Div>
-  <Typography italic size='small' color='primary'>Full Name:</Typography> 
- <div />
- <Typography>{viewDoc.doctor.UserName}</Typography>
-  </Div>
-  <Div>
-  <Typography italic size='small' color='primary'>contact:</Typography> 
- <div />
- <Typography>{viewDoc.doctor.contact}</Typography>
-  </Div>
-  <Div>
-  <Typography italic size='small' color='primary'>Department</Typography> 
- <div />
- <Typography>{viewDoc.doctor.Departmentrole}</Typography>
-  </Div>
-
-</RowFlex>
-    </Div>
-  </p>
-</div>
-</ModalContent>
-</Modal>
+<PrintSheet doc={viewDoc} />
 }
 
       <div>

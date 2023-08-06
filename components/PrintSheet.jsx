@@ -41,10 +41,13 @@ maxWidth="900px"
 >
 <ModalHeader>
 <Typography text="Print Receipt" heading="h4"/>
-{/* <CloseModal  onClick={()=>setmodal2(false)}/> */}
+<CloseModal  onClick={()=>window.location.reload()}/>
 </ModalHeader>
 <ModalContent>
 <div className="width-700-max center" id='documents'>
+  <div className="text-center">
+    <img src="/logo.png" className='width-200' alt="" />
+  </div>
 <Typography
 text="Personal Data"
 heading='h6'
@@ -110,6 +113,45 @@ heading='h6'
     }
 </div>
 </div>
+{
+  doc.prescriptions.findings &&
+<p>
+<p />
+<Typography
+text="Findings"
+heading='h6'
+/>
+<div className="round-edge padding border section lighter round-edge ">
+{doc.prescriptions.findings}
+</div>
+</p>
+}
+{
+  doc.prescriptions.results &&
+<p>
+<p />
+<Typography
+text="Results"
+heading='h6'
+/>
+<div className="round-edge padding border section lighter round-edge ">
+{doc.prescriptions.results}
+</div>
+</p>
+}
+{
+  doc.prescriptions.comments &&
+<p>
+<p />
+<Typography
+text="Other Comment"
+heading='h6'
+/>
+<div className="round-edge padding border section lighter round-edge ">
+{doc.prescriptions.comments}
+</div>
+</p>
+}
 </div>
 </ModalContent>
 <ModalAction>

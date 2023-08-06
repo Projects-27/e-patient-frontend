@@ -14,6 +14,12 @@ import Div from 'funuicss/component/Div'
 import RowFlex from 'funuicss/component/RowFlex'
 import Input from 'funuicss/component/Input'
 import Typography from 'funuicss/component/Typography'
+
+import Modal from 'funuicss/component/Modal'
+import ModalHeader from 'funuicss/component/ModalHeader'
+import CloseModal from 'funuicss/component/CloseModal'
+import ModalContent from 'funuicss/component/ModalContent'
+import ModalAction from 'funuicss/component/ModalAction'
 export default function Register() {
     const [errModal, seterrModal] = useState(false)
     const [success, setsuccess] = useState("")
@@ -21,6 +27,7 @@ export default function Register() {
     const [loading, setloading] = useState(false)
     const [users, setusers] = useState('')
     const [search, setsearch] = useState("")
+    const [dialog, setdialog] = useState(false)
     useEffect(() => {
         if(!users){
            FunRequest.get(EndPoint + "/all/users" )
@@ -103,33 +110,52 @@ const Submit = (e)=>{
    {loading ?  <FunLoader size="80px" fixed/> : ''}
         <NavBar active={"d4"}/>
         <div className="content">
-            <div>
-                <div className="h2">Staff Registration</div>
+            <div className='row-flex space-between'>
+              <div>
+              <div className="h2">Staff Registration</div>
                 <div className='section'>Dashboard / <span className="text-gray">Register Staff</span></div>
+                <div>
+              </div>
+              </div>
+                <button className="primary roundEdge button" onClick={()=>setdialog(true)}>
+                <i className="bx bx-plus"  /> Register Staff
+                </button>
             </div>
-            <div className="m-section">
-                <div className="card">
-                    <div>Staff</div>
-                    <div className="h1">Registration</div>
+
+            <Modal 
+animation="ScaleUp" 
+duration={0.4} 
+open={dialog}
+backdrop
+maxWidth="900px"
+>
+<ModalHeader>
+<Typography text="Create Account" heading="h4"/>
+<CloseModal  onClick={()=>setdialog(false)}/>
+</ModalHeader>
+<ModalContent>
+<div className="width-600-max center">
+       
                     <div className="section row">
                         <div className="col sm-12 md-4 lg-4 padding">
-                        <div className="text-gray">Email</div>
-                            <input id='email' type="text" className="input lighter full-width" placeholder='Email' />
+                        {/* <div className="text-gray">Email</div> */}
+                            <input id='email' type="text" className="input  full-width" placeholder='Email' />
                         </div>
                         <div className="col sm-12 md-4 lg-4 padding">
-                        <div className="text-gray">Full Name</div>
-                            <input id='username' type="text" className="input lighter full-width" placeholder='Full Name' />
+                        {/* <div className="text-gray">Full Name</div> */}
+                            <input id='username' type="text" className="input  full-width" placeholder='Full Name' />
                         </div>
                         <div className="col sm-12 md-4 lg-4 padding">
-                        <div className="text-gray">Phone Number</div>
-                            <input id='contact' type="text" className="input lighter full-width" placeholder='Tel' />
+                        {/* <div className="text-gray">Phone Number</div> */}
+                            <input id='contact' type="text" className="input  full-width" placeholder='Tel' />
                         </div>
                         <div className="col sm-12 md-4 lg-4 padding">
-                        <div className="text-gray">Department | Role</div>
-                            <select id='department_role' type="text" className="input lighter full-width"  >
+                        {/* <div className="text-gray">Department | Role</div> */}
+                            <select id='department_role' type="text" className="input  full-width"  >
                                <option value="admin">Admin</option>
                                <option value="reception">Reception</option>
                                <option value="doctor">Doctor</option>
+                               <option value="pharmacy">Pharmacy</option>
                                {/* <option value="lab">Lab</option>
                                <option value="scan">Scan Unit</option>
                                <option value="physician">Physician</option>
@@ -137,19 +163,20 @@ const Submit = (e)=>{
                             </select>
                         </div>
                         <div className="col sm-12 md-4 lg-4 padding">
-                        <div className="text-gray">Address</div>
-                            <input id='address' type="text" className="input lighter full-width" placeholder='Address' />
+                        {/* <div className="text-gray">Address</div> */}
+                            <input id='address' type="text" className="input  full-width" placeholder='Address' />
                         </div>
                         <div className="col sm-12 md-4 lg-4 padding">
-                        <div className="text-gray">Password</div>
-                            <input id='password' type="password" className="input lighter full-width" placeholder='Password' />
+                        {/* <div className="text-gray">Password</div> */}
+                            <input id='password' type="password" className="input  full-width" placeholder='Password' />
                         </div>
                         <div className="col sm-12 md-4 lg-4 padding">
                        <button className="primary full-width roundEdge button" onClick={Submit}>Register</button>
                         </div>
                     </div>
                 </div>
-            </div>
+</ModalContent>
+</Modal>
             <div className="section">
             <Div funcss="card text-small round-edge margin-top-30">
       <div className="padding hr">
@@ -170,7 +197,7 @@ const Submit = (e)=>{
                .filter(fDoc =>{
                  if(!search){
                      return users
-                 }else if(search.toString().toLowerCase().trim().includes(fDoc.patient_id.toString().toLowerCase().trim().slice(0 , search.length))){
+                 }else if(search.toString().toLowerCase().trim().includes(fDoc.email.toString().toLowerCase().trim().slice(0 , search.length))){
                          return fDoc
                  }
                }).length

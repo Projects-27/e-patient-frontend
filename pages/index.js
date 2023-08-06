@@ -8,6 +8,9 @@ import {FunRequest , FunGet} from 'funuicss/js/Fun'
 import ErrorModal from './../components/Error';
 const inter = Inter({ subsets: ['latin'] })
 import FunLoader from 'funuicss/component/FunLoader'
+import IconicInput from 'funuicss/component/IconicInput'
+import Input from 'funuicss/component/Input'
+import Icon from 'funuicss/component/Icon'
 export default function Home() {
   const [error, seterror] = useState("")
   useEffect(() => {
@@ -74,15 +77,26 @@ export default function Home() {
       <div className="loginContainer" >
         
     <div className="formCon">
-      <div className="padding-bottom-20 h2">
+      <div className="padding-bottom-20 h4">
         Login Account
       </div>
       <div className="section">
-      <input id='email' type="email"  className="full-width input white" placeholder='Email' />
+      <IconicInput 
+    funcss="section full-width" 
+    position="left" 
+    icon={ <Icon icon="far fa-paper-plane" color="primary" />}
+    input={<Input id='email' type="email" label="Email" funcss="full-width"  rounded />}
+     />
       </div>
       <div className="section">
-      <input id='password' type="password" className="full-width input white" placeholder='Password' />
+      <IconicInput 
+    funcss="section full-width" 
+    position="left" 
+    icon={ <Icon icon="bx bx-key" color="primary" />}
+    input={<Input id='password' type="password" label="Password" funcss="full-width"  rounded />}
+     />
       </div>
+    
       <div className="section">
       <button className='primary  full-width button roundEdge' onClick={Submit}>Login</button>
       </div>
