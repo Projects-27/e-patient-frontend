@@ -194,7 +194,7 @@ const Submit = ()=>{
                     <pre>
                     {
                         selectedOption.map((doc)=>(
-                                <div className='bt padding'>
+                                <div className='bt padding' key={doc.label}>
                                     <Typography
                                     text={doc.label}
                                     italic
