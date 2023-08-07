@@ -56,51 +56,89 @@ heading='h6'
 <Div>
   <Typography italic size='small' color='primary'>Patient Name:</Typography> 
  <div />
- <Typography heading='h4'>{doc.PatientName}</Typography>
+ <Typography heading='h4'>{`${doc.first_name} ${doc.middle_name} ${doc.last_name}`}</Typography>
   </Div>
-<RowFlex funcss='section' justify='space-between'>
-  <Div>
+<Div funcss="row">
+  <div className="col sm-6 md-4 lg-4 padding">
   <Typography italic size='small' color='primary'>Patient ID:</Typography> 
  <div />
  <Typography>{doc.patient_id}</Typography>
-  </Div>
-  <Div>
+  </div>
+  <div className="col sm-6 md-4 lg-4 padding">
   <Typography italic size='small' color='primary'>Gender:</Typography> 
  <div />
  <Typography>{doc.Sex}</Typography>
-  </Div>
-  <Div>
+  </div>
+  <div className="col sm-6 md-4 lg-4 padding">
   <Typography italic size='small' color='primary'>Date</Typography> 
  <div />
  <Typography>{doc.Date}</Typography>
-  </Div>
+  </div>
 
-</RowFlex>
-<RowFlex funcss='section' justify='space-between'>
-  <Div>
+</Div>
+<Div funcss="row">
+  <div className="col sm-6 md-4 lg-4 padding">
   <Typography italic size='small' color='primary'>Date Of Birth:</Typography> 
  <div />
  <Typography>{doc.DateofBirth}</Typography>
-  </Div>
-  <Div>
+  </div>
+  <div className="col sm-6 md-4 lg-4 padding">
   <Typography italic size='small' color='primary'>National ID:</Typography> 
  <div />
  <Typography>{doc.Sex}</Typography>
-  </Div>
-  <Div>
+  </div>
+  <div className="col sm-6 md-4 lg-4 padding">
   <Typography italic size='small' color='primary'>NHIS</Typography> 
  <div />
  <Typography>{doc.NHISNumber }</Typography>
-  </Div>
+  </div>
 
-</RowFlex>
+</Div>
+<Div funcss="row">
+  <div className="col sm-6 md-4 lg-4 padding">
+  <Typography italic size='small' color='primary'>Nationality:</Typography> 
+ <div />
+ <Typography>{doc.nationality}</Typography>
+  </div>
+  <div className="col sm-6 md-4 lg-4 padding">
+  <Typography italic size='small' color='primary'>Region:</Typography> 
+ <div />
+ <Typography>{doc.region}</Typography>
+  </div>
+  <div className="col sm-6 md-4 lg-4 padding">
+  <Typography italic size='small' color='primary'>Area</Typography> 
+ <div />
+ <Typography>{doc.area }</Typography>
+  </div>
+
+</Div>
+<Div funcss="row">
+  <div className="col sm-6 md-4 lg-4 padding">
+  <Typography italic size='small' color='primary'>Religion:</Typography> 
+ <div />
+ <Typography>{doc.religion}</Typography>
+  </div>
+  <div className="col sm-6 md-4 lg-4 padding">
+  <Typography italic size='small' color='primary'>Occupation:</Typography> 
+ <div />
+ <Typography>{doc.occupation}</Typography>
+  </div>
+  <div className="col sm-6 md-4 lg-4 padding">
+  <Typography italic size='small' color='primary'>Created</Typography> 
+ <div />
+ <Typography>{doc.created }</Typography>
+  </div>
+
+</Div>
 </div>
 <p />
 <Typography
 text="Tests"
 heading='h6'
 />
-<div className="round-edge padding border section">
+{
+  doc.SelectTest.length > 0 &&
+  <div className="round-edge padding border section">
 <div className="row">
     {
         doc.SelectTest ?
@@ -113,6 +151,7 @@ heading='h6'
     }
 </div>
 </div>
+}
 {
   doc.prescriptions.findings &&
 <p>

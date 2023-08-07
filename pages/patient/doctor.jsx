@@ -29,13 +29,16 @@ import  FunLoader from 'funuicss/component/FunLoader';
 import SuccessModal from './../../components/Success';
 import ErrorModal from './../../components/Error';
 import { IsOnline } from '../../Functions/Functions'
-
+import { MultiSelect } from "react-multi-select-component";
+import Test from  "@/data/Test"
 export default function Doctor() {
     const [patient, setpatient] = useState('')
     const [errModal, seterrModal] = useState(false)
     const [success, setsuccess] = useState("")
     const [message, setmessage] = useState('')
     const [loading, setloading] = useState(false)
+    const [selectedOption, setSelectedOption] = useState([]);
+
     const [me, setme] = useState('')
 
     useEffect(() => {
@@ -71,7 +74,8 @@ export default function Doctor() {
                 setmessage(doc.message)
             }
            }).catch(err=>{
-            console.log(err)
+            seterrModal(true)
+            setmessage(err.message)
             setloading(false)
         })
        }
@@ -88,7 +92,8 @@ const Submit = ()=>{
             comments
         },
         doctor:me,
-        status:"given prescription"
+        status:"given prescription",
+        SelectTest:selectedOption
     }
 
     if(findings && results){
@@ -156,7 +161,7 @@ if(me){
                         <div className="section row">
                             <div className="col sm-12 md-4 lg-4 padding">
                             <div className="text-primary italic text-small">Full Name</div>
-                            <div className="">{patient.PatientName }</div>
+                            <div className="">{`${patient.first_name } ${patient.middle_name } ${patient.last_name }` }</div>
                             </div>
                             <div className="col sm-12 md-4 lg-4 padding">
                             <div className="text-primary italic text-small">Phone Number</div>
@@ -192,26 +197,54 @@ if(me){
                 </div>
                {
                 patient &&
-                <div className="m-section">
-                <div className="card">
+                <div className="m-section row">
+                    <div className="col sm-12 md-8 lg-8 padding">
+                    <div className="card">
 
-                    <div className="section row">
-                        <div className="col sm-12 md-12 lg-12 padding">
-                        {/* <div className="text-gray text-bold">Findings *</div> */}
-                            <textarea id='findings' rows={5} type="text" className="input full-width" placeholder='What are your findings' />
-                        </div>
-                        <div className="col sm-12 md-12 lg-12 padding">
-                        {/* <div className="text-gray text-bold">Results *</div> */}
-                            <textarea id='results' rows={5} type="text" className="input full-width" placeholder='What are your results' />
-                        </div>
-                        <div className="col sm-12 md-12 lg-12 padding">
-                        {/* <div className="text-gray text-bold">Other Comments *</div> */}
-                            <textarea id='comments' rows={5} type="text" className="input full-width" placeholder='Other comments' />
-                        </div>
-                        <div className="col sm-12 md-4 lg-4 padding">
-                       <button className="primary full-width roundEdge button" onClick={Submit}>Submit Results</button>
-                        </div>
-                       
+<div className="padding sm-12 md-8 lg-8">
+<div className="section row">
+         <div className="col sm-12 md-12 lg-12 padding">
+         {/* <div className="text-gray text-bold">Findings *</div> */}
+             <textarea id='findings' rows={5} type="text" className="input full-width" placeholder='What are your findings' />
+         </div>
+         <div className="col sm-12 md-12 lg-12 padding">
+         {/* <div className="text-gray text-bold">Results *</div> */}
+             <textarea id='results' rows={5} type="text" className="input full-width" placeholder='What are your results' />
+         </div>
+         <div className="col sm-12 md-12 lg-12 padding">
+         {/* <div className="text-gray text-bold">Other Comments *</div> */}
+             <textarea id='comments' rows={5} type="text" className="input full-width" placeholder='Other comments' />
+         </div>
+         <div className="col sm-12 md-4 lg-4 padding">
+        <button className="primary full-width roundEdge button" onClick={Submit}>Submit Results</button>
+         </div>
+        
+     </div>
+</div>
+
+ </div>
+                    </div>
+                <div className="col padding sm-12 md-4 lg-4">
+                    <div className="card padding round-egde">
+                        <div className="text-small">Tests</div>
+                    <pre>
+                    {
+                        selectedOption.map((doc)=>(
+                                <div className='bt padding' key={doc.label}>
+                                    <Typography
+                                    text={doc.label}
+                                    italic
+                                    />
+                                </div>
+                        ))
+                    }
+                </pre>
+                            <MultiSelect
+                                options={Test}
+                                value={selectedOption}
+                                onChange={setSelectedOption}
+                                labelledBy="Select"
+                            />
                     </div>
                 </div>
             </div>

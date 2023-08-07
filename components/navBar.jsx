@@ -61,11 +61,10 @@ if(user){
               <Button
               text="Log Out"
               bg="white"
-              funcss='card'
+              funcss='card text-left padding'
               fullWidth 
               rounded
-              small
-              startIcon={<Icon icon="bx bx-check-double"  />}
+              startIcon={<Icon icon="bx bx-exit"  />}
               onClick={()=>LogOut()}
               />
             </div>
