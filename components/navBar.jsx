@@ -27,9 +27,12 @@ if(user){
             </div>
         </div>
         <div className="sideBar">
-            <Link href="/dashboard">
-            <div className={active == "d1" ? "active navLink" : "navLink"}>  <i className='bx bx-bar-chart-alt'></i>  Dashboard</div>
-            </Link>
+        {
+          user.Departmentrole == 'admin' &&
+          <Link href="/dashboard">
+          <div className={active == "d1" ? "active navLink" : "navLink"}>  <i className='bx bx-bar-chart-alt'></i>  Dashboard</div>
+          </Link>
+        }
            {
             user.Departmentrole == 'reception' ?
             <Link href="/patient/register">
@@ -38,11 +41,17 @@ if(user){
             :''
            }
        {
-        user.Departmentrole === "admin" ?
+        user.Departmentrole === "admin" || user.Departmentrole === 'doctor' ?
         <Link href="/patient/records">
         <div className={active == "d3" ? "active navLink" : "navLink"}>  <i className='bx bx-data'></i>  Patient Records</div>
         </Link>
         :""
+       }
+       {
+        user?.Departmentrole === "pharmacy" &&
+        <Link href="/pharmacy/clear_registration">
+        <div className={active == "d6" ? "active navLink" : "navLink"}>  <i className='bx bx-check'></i> Verify Registrations</div>
+        </Link>
        }
        {
         user?.Departmentrole === "admin" &&
@@ -51,7 +60,7 @@ if(user){
         </Link>
        }
            {
-            user?.Departmentrole === 'doctor'?
+            user?.Departmentrole === 'doctor' ?
             <Link href="/patient/doctor">
             <div className={active == "d5" ? "active navLink" : "navLink"}>  <i className='bx bx-capsule'></i>  Prescriptions</div>
             </Link>

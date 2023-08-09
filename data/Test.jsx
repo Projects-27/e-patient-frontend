@@ -1,15 +1,21 @@
 export default [
     {
         label:"Malaria" ,
-        value:'malaria'
+        value:'malaria',
+        mustPay: false,
+        price:300
     },
     {
         label:"Covid" ,
-        value:'covid'
+        value:'covid',
+        mustPay: true,
+        price:230
     },
     {
         label:"Pregnancy" ,
-        value:'pregnancy'
+        value:'pregnancy',
+        mustPay: false,
+        price:20
     }
   
 ]

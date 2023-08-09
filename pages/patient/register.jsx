@@ -75,6 +75,24 @@ const Submit = ()=>{
     let date = fullDate
     let DateofBirth = FunGet.val("#dob")
     let Sex = FunGet.val("#gender")
+
+    let required_paid, 
+    paid_verify,
+    lab ,
+    required_lab,
+    lab_done ,
+    pharmacy_done
+
+
+    paid_verify = false 
+    lab = {},
+    required_lab = false 
+    lab_done = false 
+    pharmacy_done = false
+    required_paid = NHISNumber.trim().length > 0 ? false : true
+
+
+    // new add
    
     const doc = {
         first_name,
@@ -102,7 +120,13 @@ const Submit = ()=>{
         month:longMonth ,
         year,
         created:fullDate,
-        registered_by:me
+        registered_by:me,
+        paid_verify,
+        lab ,
+        required_lab,
+        lab_done,
+        pharmacy_done,
+        required_paid
       }
       if(
         first_name &&
@@ -116,8 +140,6 @@ const Submit = ()=>{
           PlaceofBirth && 
           HomeAddress && 
           Contact && 
-          NHISNumber && 
-          NationalID && 
           date && 
           DateofBirth && 
           Sex 
@@ -128,7 +150,15 @@ const Submit = ()=>{
             setloading(false)
             console.log(data)
          if(data.status == "ok"){
+            if(!required_paid){
             setprintDoc(data.data)
+            }else{
+                setsuccess(true)
+                setmessage("Patient should visit the Chasier for registration payment.")
+            setTimeout(() => {
+                window.location.reload()
+            }, 4000);
+            }
          }else{
             seterrModal(true)
             setmessage(data.message)
