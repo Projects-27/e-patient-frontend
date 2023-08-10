@@ -156,7 +156,9 @@ maxWidth="900px"
                                <option value="reception">Reception</option>
                                <option value="doctor">Doctor</option>
                                <option value="pharmacy">Pharmacy</option>
-                               {/* <option value="lab">Lab</option>
+                               <option value="finance">Finance</option>
+                               <option value="lab">Lab</option>
+                               {/* 
                                <option value="scan">Scan Unit</option>
                                <option value="physician">Physician</option>
                                <option value="nurse">Nurse</option> */}

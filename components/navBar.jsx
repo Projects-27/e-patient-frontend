@@ -50,7 +50,19 @@ if(user){
        {
         user?.Departmentrole === "pharmacy" &&
         <Link href="/pharmacy/clear_registration">
+        <div className={active == "d6" ? "active navLink" : "navLink"}>  <i className='bx bx-check'></i> Clear Registrations</div>
+        </Link>
+       }
+       {
+        user?.Departmentrole === "finance" &&
+        <Link href="/finance/clear_registration">
         <div className={active == "d6" ? "active navLink" : "navLink"}>  <i className='bx bx-check'></i> Verify Registrations</div>
+        </Link>
+       }
+       {
+        user?.Departmentrole === "lab" &&
+        <Link href="/lab/result">
+        <div className={active == "d6" ? "active navLink" : "navLink"}>  <i className='bx bx-user'></i> Patient Labs</div>
         </Link>
        }
        {

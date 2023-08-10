@@ -38,6 +38,7 @@ export default function Doctor() {
     const [message, setmessage] = useState('')
     const [loading, setloading] = useState(false)
     const [selectedOption, setSelectedOption] = useState([]);
+    const [required_lab, setrequired_lab] = useState("")
 
     const [me, setme] = useState('')
 
@@ -68,7 +69,14 @@ export default function Doctor() {
            .then(data=>{
             setloading(false)
             if(data.status == 'ok'){
-                setpatient(data.data)
+                console.log(data.data)
+                if(data.data.paid_verify){
+                    setpatient(data.data)
+                }else{
+                    seterrModal(true)
+                    setmessage("Make sure patient has cleared at Finance")
+                }
+
             }else if (data.status == 'error'){
                 seterrModal(true)
                 setmessage(doc.message)
@@ -89,16 +97,16 @@ const Submit = ()=>{
         prescriptions:{
             findings ,
             results,
-            comments
+            comments ,
         },
         doctor:me,
-        status:"given prescription",
-        SelectTest:selectedOption
+        status:required_lab ? "proceed to lab" : "given prescription",
+        SelectTest:selectedOption,
+        required_lab: true
     }
-
-    if(findings && results){
+    if(findings && results && required_lab){
         setloading(true)
-        FunRequest.patch(EndPoint + '/prescription/' + patient.id , data)
+        FunRequest.patch(EndPoint + '/add/prescription/' + patient.id , data)
         .then((doc)=>{
             setloading(false)
            if(doc.status == 'ok'){
@@ -113,6 +121,9 @@ const Submit = ()=>{
            }
         }).catch((err)=>{
             console.log(err)
+            seterrModal(true)
+            setmessage(JSON.stringify(err))
+            setloading(false)
         })
     }else{
         seterrModal(true)
@@ -225,7 +236,7 @@ if(me){
  </div>
                     </div>
                 <div className="col padding sm-12 md-4 lg-4">
-                    <div className="card padding round-egde">
+                    <div className="card padding round-egde height-400-min" style={{overflow:"auto"}}>
                         <div className="text-small">Tests</div>
                     <pre>
                     {
@@ -245,6 +256,17 @@ if(me){
                                 onChange={setSelectedOption}
                                 labelledBy="Select"
                             />
+                    </div>
+                    <div className="section">
+                     <div className="card padding round-edge">
+                     <select name="" className='input borderedInput full-width' onChange={(e)=>{
+                        setrequired_lab(e.target.value)
+                     }} >
+                            <option value="">Required Lab</option>
+                            <option value={"yes"}>Yes</option>
+                            <option value={"no"}>No</option>
+                        </select>
+                     </div>
                     </div>
                 </div>
             </div>
