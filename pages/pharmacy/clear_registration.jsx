@@ -43,7 +43,7 @@ export default function ClearRegistration() {
 
     useEffect(() => {
      if(!patients){
-        FunRequest.get(EndPoint + "/get/verified/patients/" + false )
+        FunRequest.get(EndPoint + "/get/verified/pharmacy"  )
         .then(data=>{
          setpatients(data.data)
          console.log(data)

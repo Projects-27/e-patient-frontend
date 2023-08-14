@@ -89,7 +89,7 @@ const Submit = ()=>{
     required_lab = false 
     lab_done = false 
     pharmacy_done = false
-    required_paid = NHISNumber.trim().length > 0 ? false : true
+    required_paid = NHISNumber.trim().length > 0 ? true : false
 
 
     // new add
@@ -253,15 +253,15 @@ if(me){
                             </div>
                             <div className="col sm-12 md-6 lg-6 padding">
                             <div className="text-primary text-small" style={{fontStyle:"italic"}}>Home Address</div>
-                                <input id='home_address' type="text" className="input borderedInput full-width" style={{borderRadius:'3rem'}} placeholder='Tel' />
+                                <input id='home_address' type="text" className="input borderedInput full-width" style={{borderRadius:'3rem'}} placeholder='Home Address' />
                             </div>
                             <div className="col sm-12 md-6 lg-6 padding">
                             <div className="text-primary text-small" style={{fontStyle:"italic"}}>Place Of Birth</div>
-                                <input id='place_of_birth' type="text" className="input borderedInput full-width" style={{borderRadius:'3rem'}} placeholder='Home address' />
+                                <input id='place_of_birth' type="text" className="input borderedInput full-width" style={{borderRadius:'3rem'}} placeholder='Place Og Birth' />
                             </div>
                             <div className="col sm-12 md-6 lg-6 padding">
                             <div className="text-primary text-small" style={{fontStyle:"italic"}}>National ID</div>
-                                <input id='national_id' type="text" className="input borderedInput full-width" style={{borderRadius:'3rem'}} placeholder='Tel' />
+                                <input id='national_id' type="text" className="input borderedInput full-width" style={{borderRadius:'3rem'}} placeholder='National Id' />
                             </div>
                             <div className="col sm-12 md-6 lg-6 padding">
                             <div className="text-primary text-small" style={{fontStyle:"italic"}}>NHIS</div>

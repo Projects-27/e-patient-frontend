@@ -100,15 +100,15 @@ const Submit = ()=>{
             comments ,
         },
         doctor:me,
-        status:required_lab ? "proceed to lab" : "given prescription",
+        status:patient.lab_done ? "doctor cleared" : required_lab ? "Proceed to lab" : "given prescription",
         SelectTest:selectedOption,
         required_lab: true
     }
+    console.log(patient.id)
     if(findings && results && required_lab){
         setloading(true)
         FunRequest.patch(EndPoint + '/add/prescription/' + patient.id , data)
         .then((doc)=>{
-            setloading(false)
            if(doc.status == 'ok'){
             setsuccess(true)
             setmessage("prescriptions given succesfully")
@@ -144,7 +144,7 @@ if(me){
            <NavBar active={"d5"}/>
            <div className="content">
            <div>
-                    <div className="h2">Patient Findings | Prescription</div>
+                    <div className="h4">Patient Findings</div>
                     <div className='section'>Dashboard / <span className="text-primary italic text-small">Patient prescription</span></div>
                 </div>
                 <div className="m-section">
@@ -199,6 +199,15 @@ if(me){
                           </div>
                             </div>
                         </div>
+                       {
+                        patient.lab.results &&
+                        <div className="section padding">
+                        <div className="text-small">Lab Results</div>
+                        <div className='padding round-edge border'>
+                            {patient.lab.results ? patient.lab.results : ''}
+                        </div>
+                    </div>
+                       }
                         </div>
                         : <div className="padding text-center">
                             Enter patient id to get patient
@@ -216,18 +225,23 @@ if(me){
 <div className="section row">
          <div className="col sm-12 md-12 lg-12 padding">
          {/* <div className="text-gray text-bold">Findings *</div> */}
-             <textarea id='findings' rows={5} type="text" className="input full-width" placeholder='What are your findings' />
+             <textarea defaultValue={patient.prescriptions.findings ? patient.prescriptions.findings  : ''} id='findings' rows={5} type="text" className="input full-width" placeholder='What are your findings' />
          </div>
          <div className="col sm-12 md-12 lg-12 padding">
          {/* <div className="text-gray text-bold">Results *</div> */}
-             <textarea id='results' rows={5} type="text" className="input full-width" placeholder='What are your results' />
+             <textarea defaultValue={patient.prescriptions.results ? patient.prescriptions.results  : ''}  id='results' rows={5} type="text" className="input full-width" placeholder='What are your results' />
          </div>
          <div className="col sm-12 md-12 lg-12 padding">
          {/* <div className="text-gray text-bold">Other Comments *</div> */}
-             <textarea id='comments' rows={5} type="text" className="input full-width" placeholder='Other comments' />
+             <textarea id='comments' defaultValue={patient.prescriptions.comments ? patient.prescriptions.comments  : ''}  rows={5} type="text" className="input full-width" placeholder='Other comments' />
          </div>
          <div className="col sm-12 md-4 lg-4 padding">
-        <button className="primary full-width roundEdge button" onClick={Submit}>Submit Results</button>
+        <button className="primary full-width roundEdge button" onClick={Submit}>
+        <i className='bx bx-check' />     
+            {
+       patient.lab_done ? "Cleared Patient" : "Submit Patient"
+            }
+        </button>
          </div>
         
      </div>
@@ -259,7 +273,7 @@ if(me){
                     </div>
                     <div className="section">
                      <div className="card padding round-edge">
-                     <select name="" className='input borderedInput full-width' onChange={(e)=>{
+                     <select name="" defaultValue={patient.required_lab ? patient.required_lab  : ''}  className='input borderedInput full-width' onChange={(e)=>{
                         setrequired_lab(e.target.value)
                      }} >
                             <option value="">Required Lab</option>
