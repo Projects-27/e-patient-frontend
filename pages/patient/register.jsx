@@ -126,7 +126,8 @@ const Submit = ()=>{
         required_lab,
         lab_done,
         pharmacy_done,
-        required_paid
+        required_paid ,
+        health_records:{}
       }
       if(
         first_name &&

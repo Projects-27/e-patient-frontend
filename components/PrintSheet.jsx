@@ -130,6 +130,27 @@ heading='h6'
   </div>
 
 </Div>
+{
+  doc.health_records != {} &&
+  <Div funcss="row">
+  <div className="col sm-6 md-4 lg-4 padding">
+  <Typography italic size='small' color='primary'>Weight:</Typography> 
+ <div />
+ <Typography>{doc.health_records.weight}</Typography>
+  </div>
+  <div className="col sm-6 md-4 lg-4 padding">
+  <Typography italic size='small' color='primary'>Temperature:</Typography> 
+ <div />
+ <Typography>{doc.health_records.temperature}</Typography>
+  </div>
+  <div className="col sm-6 md-4 lg-4 padding">
+  <Typography italic size='small' color='primary'>Bp</Typography> 
+ <div />
+ <Typography>{doc.health_records.bp }</Typography>
+  </div>
+
+</Div>
+}
 </div>
 <p />
 <Typography

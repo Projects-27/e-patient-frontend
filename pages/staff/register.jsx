@@ -158,6 +158,7 @@ maxWidth="900px"
                                <option value="pharmacy">Pharmacy</option>
                                <option value="finance">Finance</option>
                                <option value="lab">Lab</option>
+                               <option value="opd">OPD</option>
                                {/* 
                                <option value="scan">Scan Unit</option>
                                <option value="physician">Physician</option>
@@ -227,7 +228,6 @@ maxWidth="900px"
       }).map(doc=>(
         <TableRow key={doc.id}>
         <TableData>{doc.userName}</TableData>
-        <TableData>{doc.password}</TableData>
         <TableData>{doc.email}</TableData>
         <TableData>{doc.contact}</TableData>
         <TableData>{doc.Departmentrole}</TableData>

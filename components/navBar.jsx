@@ -66,6 +66,12 @@ if(user){
         </Link>
        }
        {
+        user?.Departmentrole === "opd"  &&
+        <Link href="/patient/health_records">
+        <div className={active == "d8" ? "active navLink" : "navLink"}>  <i className='bx bx-user'></i> OPD</div>
+        </Link>
+       }
+       {
         user?.Departmentrole === "admin" &&
         <Link href="/staff/register">
         <div className={active == "d4" ? "active navLink" : "navLink"}>  <i className='bx bx-user'></i>  New Staff</div>

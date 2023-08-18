@@ -195,6 +195,7 @@ onClick={handleLog}
            <TableData>Gender</TableData>
            <TableData>Status</TableData>
            <TableData>Date</TableData>
+           <TableData>View</TableData>
        </TableHead>
      {
       patients &&
@@ -207,7 +208,7 @@ onClick={handleLog}
       }).map(doc=>(
         <TableRow key={doc.id}>
         <TableData>{doc.patient_id}</TableData>
-        <TableData>{doc.PatientName}</TableData>
+        <TableData>{doc.first_name}{" "}{doc.middle_name}{" "}{doc.last_name}</TableData>
         <TableData>{doc.NHISNumber}</TableData>
         <TableData>{doc.Sex}</TableData>
         <TableData>{doc.status}</TableData>

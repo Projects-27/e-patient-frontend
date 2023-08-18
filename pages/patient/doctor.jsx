@@ -101,14 +101,14 @@ const Submit = ()=>{
         },
         doctor:me,
         status:patient.lab_done ? "doctor cleared" : required_lab ? "Proceed to lab" : "given prescription",
-        SelectTest:selectedOption,
+        SelectTest: patient.SelectTest.length > 0 ? patient.SelectTest : selectedOption,
         required_lab: true
     }
-    console.log(patient.id)
-    if(findings && results && required_lab){
+    if(findings && results && (required_lab || patient.required_lab)){
         setloading(true)
         FunRequest.patch(EndPoint + '/add/prescription/' + patient.id , data)
         .then((doc)=>{
+            setloading(false)
            if(doc.status == 'ok'){
             setsuccess(true)
             setmessage("prescriptions given succesfully")
@@ -120,7 +120,6 @@ const Submit = ()=>{
             setmessage(doc.message)
            }
         }).catch((err)=>{
-            console.log(err)
             seterrModal(true)
             setmessage(JSON.stringify(err))
             setloading(false)
@@ -178,15 +177,27 @@ if(me){
                             <div className="text-primary italic text-small">Phone Number</div>
                             <div className="">{patient.Contact}</div>
                             </div>
-                            <div className="col sm-12 md-4 lg-4 padding">
+                            <div className="col sm-12 md-3 lg-3 padding">
                                 <div className="text-primary italic text-small">Date of birth</div>
                                 <div className="">{patient.DateofBirth }</div>
                             </div>
-                            <div className="col sm-12 md-4 lg-4 padding">
+                            <div className="col sm-12 md-3 lg-3 padding">
                             <div className="text-primary italic text-small">Town | Location</div>
                             <div className="">{patient.HomeAddress  }</div>
                             </div>
-                            <div className="col sm-12 md-8 lg-8 padding">
+                            <div className="col sm-12 md-3 lg-3 padding">
+                            <div className="text-primary italic text-small">Weight</div>
+                            <div className="">{patient.health_records.weight  }</div>
+                            </div>
+                            <div className="col sm-12 md-3 lg-3 padding">
+                            <div className="text-primary italic text-small">Temperature</div>
+                            <div className="">{patient.health_records.temperature  }</div>
+                            </div>
+                            <div className="col sm-12 md-3 lg-3 padding">
+                            <div className="text-primary italic text-small">BP</div>
+                            <div className="">{patient.health_records.bp  }</div>
+                            </div>
+                            <div className="col sm-12 md-12 lg-12 padding">
                             <div className="text-primary italic text-small">Test</div>
                           <div className="row">
                             {
@@ -277,8 +288,8 @@ if(me){
                         setrequired_lab(e.target.value)
                      }} >
                             <option value="">Required Lab</option>
-                            <option value={"yes"}>Yes</option>
-                            <option value={"no"}>No</option>
+                            <option value={true}>Yes</option>
+                            <option value={false}>No</option>
                         </select>
                      </div>
                     </div>
