@@ -44,7 +44,36 @@ export default function Home() {
       new Promise((resolve, reject) => {
         sessionStorage.setItem('user', JSON.stringify(data.data));
         resolve()
-      }).then(()=>window.location.href="/dashboard")
+      }).then(()=>{
+        switch (data.data.Departmentrole) {
+          case "admin":
+          window.location.href="/dashboard"
+            break;
+          case "pharmacy":
+          window.location.href="/pharmacy/clear_registration"
+            break;
+          case "finance":
+          window.location.href="/finance/clear_registration"
+            break;
+          case "lab":
+          window.location.href="/lab/result"
+            break;
+          case "opd":
+          window.location.href="/patient/health_records"
+            break;
+          case "doctor":
+          window.location.href="/patient/doctor"
+            break;
+          case "reception":
+          window.location.href="/patient/register"
+            break;
+        
+          default:
+            break;
+        }
+
+
+      })
  
 
      }

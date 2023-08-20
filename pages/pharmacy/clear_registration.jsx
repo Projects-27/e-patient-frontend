@@ -43,10 +43,9 @@ export default function ClearRegistration() {
 
     useEffect(() => {
      if(!patients){
-        FunRequest.get(EndPoint + "/get/verified/pharmacy"  )
+        FunRequest.get(EndPoint + "/get/verified/pharmacy/" + false  )
         .then(data=>{
          setpatients(data.data)
-         console.log(data)
         }).catch(err=>console.log(err))
      }
     })
@@ -82,44 +81,9 @@ setdisplayModal(true)
         <Alert message={message} fixed="top-middle" type="info" />
         :''
       }
-<Modal 
-animation="ScaleUp" 
-duration={0.4} 
-open={modal2}
-backdrop
-maxWidth="400px"
->
-<ModalHeader>
-<Typography text="Create/Edit Log" heading="h5"/>
-<CloseModal  onClick={()=>setmodal2(false)}/>
-</ModalHeader>
-<ModalContent>
-<Input label="Date" type='date' bordered fullWidth funcss="date" />
-<Section />
-<Input 
-label="Activity"
- bordered
-  fullWidth
-  multiline
-  funcss='activity'
-  rows={5}
- />
-<Section />
-<Section />
-{/* <Button
-text="Submit"
-bg="primary"
-fullWidth
-onClick={handleLog}
-/> */}
-</ModalContent>
-</Modal>
 
 
-{
-  viewDoc &&
-<PrintSheet doc={viewDoc} />
-}
+
 
       <div>
       <Link href="/user" legacyBehavior>
@@ -130,20 +94,20 @@ onClick={handleLog}
             <BreadCrumb type={"straight"} />
             <Link href="#" legacyBehavior>
            <Button rounded bg="primary" smaller>
-           <Icon icon="bx bx-book" /> Patients Registration
+           <Icon icon="bx bx-book" /> Pharmacy Clearance
            </Button>
             </Link>
             <div className="section">
               <RowFlex justify='space-between'>
                 <Div>
                 <Typography
-                text="Patients Registrations"
+                text="Pharmacy Clearance"
                 heading='h4'
                 lighter
                 />
                 <br />
                 <Typography
-                text="Check and manage all Patients Registration"
+                text="Check and manage all Pharmacy Clearance"
                 />
                 </Div>
             
@@ -151,7 +115,7 @@ onClick={handleLog}
             </div>
          
       </div>
-      <Div funcss="card text-small round-edge margin-top-30">
+      <Div funcss="_card text-small  margin-top-30">
       <div className="padding hr">
       <RowFlex justify='space-between' gap='2rem'>
       <Input label="Patient ID" onChange={(e)=>setsearch(e.target.value)} fullWidth/>
@@ -208,14 +172,15 @@ onClick={handleLog}
            height="2.5rem" 
      width="2.5rem" 
      float 
-     bg='success'
+     bg='light-success'
           onClick={()=>{
             setloading(true)
-            FunRequest.patch(EndPoint + "/pharmacy/cleared/" + doc.id , {"paid_verify" : true})
+            FunRequest.patch(EndPoint + "/pharmacy/cleared/" + doc.id , {"pharmacy_done" : true})
             .then(()=>{
                 setloading(false)
                 HandleModal(true)
                 setviewDoc(doc)
+                setpatients("")
             })
             .catch(err=>console.log(err))
 

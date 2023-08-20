@@ -89,7 +89,7 @@ const Submit = ()=>{
     required_lab = false 
     lab_done = false 
     pharmacy_done = false
-    required_paid = NHISNumber.trim().length > 0 ? true : false
+    required_paid = NHISNumber ? false : true
 
 
     // new add
@@ -129,6 +129,7 @@ const Submit = ()=>{
         required_paid ,
         health_records:{}
       }
+
       if(
         first_name &&
         last_name&&

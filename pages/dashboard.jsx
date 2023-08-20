@@ -2,156 +2,69 @@ import NavBar from './../components/navBar';
 import Link  from 'next/link';
 import React, { PureComponent } from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
-
+import { useState } from 'react'
+import { useEffect } from 'react'
+import {FunRequest} from 'funuicss/js/Fun'
+import { EndPoint } from './../components/EndPoint'
 export default function Dashboard() {
-  const data = [
-    {
-      name: 'January',
-      uv: 4000,
-      pv: 2400,
-      amt: 2400,
-    },
-    {
-      name: 'February',
-      uv: 3000,
-      pv: 1398,
-      amt: 2210,
-    },
-    {
-      name: 'Match',
-      uv: 2000,
-      pv: 9800,
-      amt: 2290,
-    },
-    {
-      name: 'April',
-      uv: 2780,
-      pv: 3908,
-      amt: 2000,
-    },
-    {
-      name: 'May',
-      uv: 1890,
-      pv: 4800,
-      amt: 2181,
-    },
-    {
-      name: 'June',
-      uv: 2390,
-      pv: 3800,
-      amt: 2500,
-    },
-    {
-      name: 'July',
-      uv: 3490,
-      pv: 4300,
-      amt: 2100,
-    },
-    {
-      name: 'August',
-      uv: 3490,
-      pv: 4300,
-      amt: 2100,
-    },
-    {
-      name: 'September',
-      uv: 3490,
-      pv: 4300,
-      amt: 2100,
-    },
-    {
-      name: 'October',
-      uv: 3490,
-      pv: 4300,
-      amt: 2100,
-    },
-    {
-      name: 'November',
-      uv: 3490,
-      pv: 4300,
-      amt: 2100,
-    },
-    {
-      name: 'December',
-      uv: 3490,
-      pv: 4300,
-      amt: 2100,
-    },
+  const [patients, setpatients] = useState('')
+  const [cleared, setcleared] = useState('')
+  const [uncleared, setuncleared] = useState('')
+  useEffect(() => {
+    if(!patients){
+       FunRequest.get(EndPoint + "/all/patients" )
+       .then(data=>{
+        setpatients(data.data)
+       }).catch(err=>console.log(err))
+    }
+   })
+  useEffect(() => {
+    if(!cleared && patients){
+       FunRequest.get(EndPoint + "/get/verified/pharmacy/" + true )
+       .then(data=>{
+        setcleared(data.data)
+       }).catch(err=>console.log(err))
+    }
+   })
+  useEffect(() => {
+    if(!uncleared && patients && cleared){
 
-  ];
+      const calculate_uncleared = (a , b) => {
+        return parseInt(a) - parseInt(b)
+      }
+      setuncleared(calculate_uncleared(patients.length , cleared.length))
+      //  FunRequest.get(EndPoint + "/get/verified/pharmacy/" + false )
+      //  .then(data=>{
+      //   setuncleared(data.data)
+      //  }).catch(err=>console.log(err))
+    }
+   })
   return (
     <div>
         <NavBar active={"d1"} />
         <div className="content">
           <div className="row">
-            <div className="col sm-12 md-6 lg-6 padding">
-              <div className="card">
-                <div className="">Total Number of Patients Registered</div>
-                <div className="h1">200</div>
+          <div className="col sm-12 md-4 lg-4 padding">
+              <div className="_card">
+                <div className="text-small text-italic">Total number of patients</div>
+                <div className="h2 text-grey">{patients ? patients.length : '...'}</div>
               </div>
             </div>
-            <div className="col sm-12 md-6 lg-6 padding">
-              <div className="card">
-                <div className="">Patient</div>
-                <div className="h1">Registration</div>
-                <div className="section">
-                 <Link href="/patient/register">
-                 <button className='primary button roundEdge full-width'>Register Patient</button>
-                 </Link>
-                </div>
+          <div className="col sm-12 md-4 lg-4 padding">
+              <div className="_card">
+                <div className="text-small text-italic">Patients Uncleared</div>
+                <div className="h2 text-grey">{uncleared ? uncleared : '...'}</div>
               </div>
             </div>
-            <div className="col sm-12 md-12 lg-12 padding">
-           <div className="card">
-            <div>Data For Year</div>
-            <div className="section">
-            <div style={{ width: '100%', height: 200 }}>
-        <ResponsiveContainer>
-          <AreaChart
-            data={data}
-            margin={{
-              top: 10,
-              right: 30,
-              left: 0,
-              bottom: 0,
-            }}
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="name" />
-            <YAxis />
-            <Tooltip />
-            <Area type="monotone" dataKey="uv" stroke="#82CD47" fill="#82CD47" />
-          </AreaChart>
-        </ResponsiveContainer>
-      </div>
-            </div>
-           </div>
-            </div>
-            <div className="col sm-12 md-3 lg-3 padding">
-              <div className="card">
-                <div className="text-grey">Today</div>
-                <div className="h1">10</div>
+          <div className="col sm-12 md-4 lg-4 padding">
+              <div className="_card">
+                <div className="text-small text-italic">Patients Cleared</div>
+                <div className="h2 text-grey">{cleared ? cleared.length : '...'}</div>
               </div>
             </div>
-            <div className="col sm-12 md-3 lg-3 padding">
-              <div className="card">
-                <div className="text-grey">Yesterday</div>
-                <div className="h1">90</div>
-              </div>
-            </div>
-            <div className="col sm-12 md-3 lg-3 padding">
-              <div className="card">
-                <div className="text-grey">This Month</div>
-                <div className="h1">102</div>
-              </div>
-            </div>
-            <div className="col sm-12 md-3 lg-3 padding">
-              <div className="card">
-                <div className="text-grey">This Year</div>
-                <div className="h1">1034</div>
-              </div>
-            </div>
+          
           </div>
+       
         </div>
     </div>
   )
