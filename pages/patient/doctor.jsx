@@ -88,16 +88,16 @@ export default function Doctor() {
         })
        }
 const Submit = ()=>{
-    let findings, results , comments , data
+    let findings, results , prescription , data
     findings = FunGet.val("#findings")
     results = FunGet.val("#results")
-    comments = FunGet.val("#comments")
+    prescription = FunGet.val("#prescription")
 
     data = {
         prescriptions:{
             findings ,
             results,
-            comments ,
+            prescription ,
         },
         doctor:me,
         status:patient.lab_done ? "doctor cleared" : required_lab ? "Proceed to lab" : "given prescription",
@@ -243,8 +243,8 @@ if(me){
              <textarea defaultValue={patient.prescriptions.results ? patient.prescriptions.results  : ''}  id='results' rows={5} type="text" className="input full-width" placeholder='What are your results' />
          </div>
          <div className="col sm-12 md-12 lg-12 padding">
-         {/* <div className="text-gray text-bold">Other Comments *</div> */}
-             <textarea id='comments' defaultValue={patient.prescriptions.comments ? patient.prescriptions.comments  : ''}  rows={5} type="text" className="input full-width" placeholder='Other comments' />
+         {/* <div className="text-gray text-bold">Other prescription *</div> */}
+             <textarea id='prescription' defaultValue={patient.prescriptions.prescription ? patient.prescriptions.prescription  : ''}  rows={5} type="text" className="input full-width" placeholder='Other prescription' />
          </div>
          <div className="col sm-12 md-4 lg-4 padding">
         <button className="primary full-width roundEdge button" onClick={Submit}>

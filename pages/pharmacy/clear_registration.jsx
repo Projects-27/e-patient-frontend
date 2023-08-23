@@ -14,6 +14,7 @@ import ModalContent from 'funuicss/component/ModalContent'
 import ModalAction from 'funuicss/component/ModalAction'
 import Input from 'funuicss/component/Input'
 import Section from 'funuicss/component/Section'
+import Circle from 'funuicss/component/Circle'
 import { useState } from 'react'
 import { useEffect } from 'react'
 // import { isOnline } from '../Functions/Functions'
@@ -71,7 +72,10 @@ setdisplayModal(true)
 
   return (
     <div>
-        
+        {
+  viewDoc &&
+<PrintSheet doc={viewDoc} /> 
+}
       <NavBar active={"d6"}/>
     <div className='content'>
           {
@@ -150,6 +154,7 @@ setdisplayModal(true)
            <TableData>Gender</TableData>
            <TableData>Status</TableData>
            <TableData>Date</TableData>
+           <TableData>View</TableData>
            <TableData>Verify</TableData>
        </TableHead>
      {
@@ -167,6 +172,13 @@ setdisplayModal(true)
         <TableData>{doc.Sex}</TableData>
         <TableData>{doc.status}</TableData>
         <TableData>{doc.Date}</TableData>
+        <TableData>
+       <div onClick={() => setviewDoc(doc) }>
+       <Circle size='30px' funcss='warning' >
+            <i className='fas fa-eye' />
+          </Circle>
+       </div>
+        </TableData>
         <TableData>
           <Button   
            height="2.5rem" 

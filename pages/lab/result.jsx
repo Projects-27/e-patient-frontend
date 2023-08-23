@@ -94,16 +94,16 @@ export default function Doctor() {
         })
        }
 const Submit = ()=>{
-    let findings, results , comments , data
+    let findings, results , prescription , data
     // findings = FunGet.val("#findings")
     results = FunGet.val("#results")
-    // comments = FunGet.val("#comments")
+    // prescription = FunGet.val("#prescription")
 
     data = {
         lab:{
             doneBy:me ,
             results,
-            // comments ,
+            // prescription ,
         },
         status: "Done with Lab",
         lab_done: true
@@ -210,9 +210,9 @@ if(me){
                             </div>
                         </div>
                         <div className="section">
-                            <div className="text-small">Other Comments</div>
+                            <div className="text-small">prescription</div>
                             <div className="border padding round-edge">
-                                {patient.prescriptions.comments ? patient.prescriptions.comments : '' }
+                                {patient.prescriptions.prescription ? patient.prescriptions.prescription : '' }
                             </div>
                         </div>
                  

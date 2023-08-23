@@ -177,7 +177,16 @@ onClick={handleLog}
                .filter(fDoc =>{
                  if(!search){
                      return patients
-                 }else if(search.toString().toLowerCase().trim().includes(fDoc.patient_id.toString().toLowerCase().trim().slice(0 , search.length))){
+                 }else if(
+                  search.toString().toLowerCase().trim().includes(fDoc.patient_id.toString().toLowerCase().trim().slice(0 , search.length))
+                  ||
+                  search.toString().toLowerCase().trim().includes(fDoc.first_name.toString().toLowerCase().trim().slice(0 , search.length))
+                  ||
+                  search.toString().toLowerCase().trim().includes(fDoc.middle_name.toString().toLowerCase().trim().slice(0 , search.length))
+                  ||
+                  search.toString().toLowerCase().trim().includes(fDoc.last_name.toString().toLowerCase().trim().slice(0 , search.length))
+          
+                  ){
                          return fDoc
                  }
                }).length
@@ -201,7 +210,15 @@ onClick={handleLog}
       patients.filter(fDoc =>{
         if(!search){
             return patients
-        }else if(search.toString().toLowerCase().trim().includes(fDoc.patient_id.toString().toLowerCase().trim().slice(0 , search.length))){
+        }else if(search.toString().toLowerCase().trim().includes(fDoc.patient_id.toString().toLowerCase().trim().slice(0 , search.length))
+        ||
+        search.toString().toLowerCase().trim().includes(fDoc.first_name.toString().toLowerCase().trim().slice(0 , search.length))
+        ||
+        search.toString().toLowerCase().trim().includes(fDoc.middle_name.toString().toLowerCase().trim().slice(0 , search.length))
+        ||
+        search.toString().toLowerCase().trim().includes(fDoc.last_name.toString().toLowerCase().trim().slice(0 , search.length))
+
+        ){
                 return fDoc
         }
       }).map(doc=>(

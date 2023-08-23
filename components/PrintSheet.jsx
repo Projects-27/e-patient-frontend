@@ -200,15 +200,14 @@ heading='h6'
 </p>
 }
 {
-  doc.prescriptions.comments &&
+  doc.prescriptions.prescription &&
 <p>
 <p />
 <Typography
 text="Other Comment"
-heading='h6'
 />
 <div className="round-edge padding border section lighter round-edge ">
-{doc.prescriptions.comments}
+{doc.prescriptions.prescription}
 </div>
 </p>
 }

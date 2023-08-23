@@ -133,9 +133,7 @@ const Submit = ()=>{
       if(
         first_name &&
         last_name&&
-        middle_name &&
         nationality&&
-        religion&&
         occupation&&
         area&&
         region&&
@@ -197,8 +195,8 @@ if(me){
             <div className="content">
     
                 <div>
-                    <div className="h2">Patient Registration</div>
-                    <div className='section'>Dashboard / <span className="text-primary text-small" style={{fontStyle:"italic"}}>Register patient</span></div>
+                    <div className="h4">Patient Registration</div>
+                    <div className='section '>Dashboard / <span className="" >Register patient</span></div>
                 </div>
                 <div className="m-section row">
                     <div className="col sm-12 md-12 lg-12">
@@ -251,7 +249,7 @@ if(me){
     
                             <div className="col sm-12 md-6 lg-6 padding">
                             <div className="text-primary text-small" style={{fontStyle:"italic"}}>Phone Number</div>
-                                <input id='contact' type="text" className="input borderedInput full-width" style={{borderRadius:'3rem'}} placeholder='Tel' />
+                                <input required id='contact' type="text" className="input borderedInput full-width" style={{borderRadius:'3rem'}} placeholder='Tel' />
                             </div>
                             <div className="col sm-12 md-6 lg-6 padding">
                             <div className="text-primary text-small" style={{fontStyle:"italic"}}>Home Address</div>
@@ -259,7 +257,7 @@ if(me){
                             </div>
                             <div className="col sm-12 md-6 lg-6 padding">
                             <div className="text-primary text-small" style={{fontStyle:"italic"}}>Place Of Birth</div>
-                                <input id='place_of_birth' type="text" className="input borderedInput full-width" style={{borderRadius:'3rem'}} placeholder='Place Og Birth' />
+                                <input  id='place_of_birth' type="text" className="input borderedInput full-width" style={{borderRadius:'3rem'}} placeholder='Place Of Birth' />
                             </div>
                             <div className="col sm-12 md-6 lg-6 padding">
                             <div className="text-primary text-small" style={{fontStyle:"italic"}}>National ID</div>
@@ -271,7 +269,7 @@ if(me){
                             </div>
                             <div className="col sm-12 md-6 lg-6 padding">
                                 <div className="text-primary text-small" style={{fontStyle:"italic"}}>Date of birth</div>
-                                <input id='dob' type="date" className="input borderedInput full-width" style={{borderRadius:'3rem'}}  />
+                                <input min="2023-08-23" id='dob' type="date" className="input borderedInput full-width" style={{borderRadius:'3rem'}}  />
                             </div>
                       
                             <div className="col sm-12 md-6 lg-6 padding">
